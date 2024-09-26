@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bootstrap 5 Navbar & Form</title>
+    <!-- Bootstrap CSS CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container">
+        <a class="navbar-brand" href="#">STMS</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul
+            class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+            style="--bs-scroll-height: 100px"
+          >
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="./view.html">View</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Student Registration Form inside Card -->
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow p-4">
+            <h2 class="text-center mb-4">Student Registration</h2>
+            <form id="studentForm">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control"
+                  id="firstName"
+                  placeholder="Enter your first name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control"
+                  id="lastName"
+                  placeholder="Enter your last name"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="roll" class="form-label">Roll</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control"
+                  id="roll"
+                  placeholder="Enter your roll number"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="class" class="form-label">Class</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control"
+                  id="class"
+                  placeholder="Enter your class"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="mobile" class="form-label">Mobile</label>
+                <input
+                  type="text"
+                  name=""
+                  class="form-control"
+                  id="mobile"
+                  placeholder="Enter your mobile number"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  name=""
+                  class="form-control"
+                  id="email"
+                  placeholder="Enter your email"
+                  required
+                />
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="submit" class="btn btn-primary me-md-2">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      class Student {
+        constructor(firstName, lastName, roll, StudentClass, mobile, email) {
+          this.firstName = firstName;
+          this.lastName = lastName;
+          this.roll = roll;
+          this.StudentClass = StudentClass;
+          this.mobile = mobile;
+          this.email = email;
+        }
+        toJSON() {
+          return {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            roll: this.roll,
+            StudentClass: this.StudentClass,
+            mobile: this.mobile,
+            email: this.email,
+          };
+        }
+      }
+
+      document
+        .getElementById("studentForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          let firstName = document.getElementById("firstName").value;
+          let lastName = document.getElementById("lastName").value;
+          let roll = document.getElementById("roll").value;
+          let StudentClass = document.getElementById("class").value;
+          let mobile = document.getElementById("mobile").value;
+          let email = document.getElementById("email").value;
+
+          let student = new Student(
+            firstName,
+            lastName,
+            roll,
+            StudentClass,
+            mobile,
+            email
+          );
+          //   add data to localStorage
+          let students = JSON.parse(localStorage.getItem("students")) || [];
+          students.push(student.toJSON());
+          localStorage.setItem("students", JSON.stringify(students));
+          window.location.href = "./view.html";
+          //document.getElementById('studentForm').reset()
+        });
+    </script>
+    <!-- Bootstrap JS and Popper.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
